@@ -1,12 +1,20 @@
 package com.example.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "leitores")
+@PrimaryKeyJoinColumn(name = "id_leitor")
 public class Leitor extends Usuario {
-    private int id_leitor;
-    public Leitor(int user_id, String name, String email, String senha, int id_leitor){
-        super(user_id, name, email, senha);
-        this.id_leitor = id_leitor;
+    public Leitor() {
+        super();
     }
-    public int getId_leitor() {
-        return id_leitor;
+    public Leitor(String name, String email, String senha){
+        super(name, email, senha);
+    }
+    public Integer getId_leitor() {
+        return super.getUser_id();
     }
 }

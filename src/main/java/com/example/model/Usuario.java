@@ -1,18 +1,33 @@
 package com.example.model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 
+
+@Entity
+@Table(name = "usuarios")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
-    private int user_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer user_id;
     private String name;
     private String email;
     private String senha;
 
-    public Usuario(int user_id, String name, String email, String senha) {
-        this.user_id = user_id;
+    public Usuario() {
+    }
+
+    public Usuario(String name, String email, String senha) {
         this.name = name;
         this.email = email;
         this.senha = senha;
     }
-    public int getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
     public String getName() {
