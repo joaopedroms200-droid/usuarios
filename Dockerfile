@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/openjdk/jdk:21-ubuntu
-VOLUME /tmp
+#VOLUME /tmp
 ARG JAVA_OPTS
 ENV JAVA_OPTS=$JAVA_OPTS
 COPY target/usuarios-0.0.1-SNAPSHOT.jar usuarios.jar
