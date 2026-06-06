@@ -1,9 +1,9 @@
-FROM mcr.microsoft.com/openjdk/jdk:21-ubuntu
-#VOLUME /tmp
-ARG JAVA_OPTS
-ENV JAVA_OPTS=$JAVA_OPTS
-COPY target/usuarios-0.0.1-SNAPSHOT.jar usuarios.jar
+
+FROM maven:3.8.8-eclipse-temurin-17 AS build
+COPY . .
+RUN mvn clean package -DskipTests
+
+FROM eclipse-temurin:17-jdk-alpine
+COPY --from=build /target/usuarios-0.0.1-SNAPSHOT.jar usuarios.jar
 EXPOSE 8080
-#ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -jar usuarios.jar"]
-# For Spring-Boot project, use the entrypoint below to reduce Tomcat startup time.
-ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar usuarios.jar"]
+ENTRYPOINT ["java", "-jar", "usuarios.jar"]
